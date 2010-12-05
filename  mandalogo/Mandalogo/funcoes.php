@@ -1,6 +1,23 @@
 <?php
 session_start("login");
 
+function cadastraNoBD($usuario, $senha, $lembrete, $email) {
+	
+	$msg[0] = "Conexão com o banco falhou!";
+	$msg[1] = "Não foi possível selecionar o banco de dados!";
+
+	$conexao = mysql_pconnect("localhost","root","f3l1p3") or die($msg[0]);
+	mysql_select_db("Mandalogo",$conexao) or die($msg[1]);
+
+	$query = 'INSERT INTO login (name, pass, lembrete, email)  values('.'"'.$usuario.'"'.','.'"'.$senha.'"'.','.'"'.$lembrete.'"'.','.'"'.$email.'"'.')';
+
+	$resultado = mysql_query($query,$conexao);
+
+	while ($linha = mysql_fetch_array($resultado)) {
+		echo  $linha[0];
+	}
+}
+
 function cadastrar($usuario,$senha,$lembrete,$email){
  	include("usuarios.php");
  	if(($usuario=="") OR ($senha=="") OR ($lembrete=="") OR ($email=="")){
