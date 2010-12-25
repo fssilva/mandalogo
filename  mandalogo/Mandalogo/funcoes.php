@@ -1,23 +1,6 @@
 <?php
 session_start("login");
 
-function cadastraNoBD($usuario, $senha, $lembrete, $email) {
-	
-	$msg[0] = "Conexão com o banco falhou!";
-	$msg[1] = "Não foi possível selecionar o banco de dados!";
-
-	$conexao = mysql_pconnect("localhost","root","f3l1p3") or die($msg[0]);
-	mysql_select_db("Mandalogo",$conexao) or die($msg[1]);
-
-	$query = 'INSERT INTO login (name, pass, lembrete, email)  values('.'"'.$usuario.'"'.','.'"'.$senha.'"'.','.'"'.$lembrete.'"'.','.'"'.$email.'"'.')';
-
-	$resultado = mysql_query($query,$conexao);
-
-	while ($linha = mysql_fetch_array($resultado)) {
-		echo  $linha[0];
-	}
-}
-
 function cadastrar($usuario,$senha,$lembrete,$email){
  	include("usuarios.php");
  	if(($usuario=="") OR ($senha=="") OR ($lembrete=="") OR ($email=="")){
@@ -108,21 +91,7 @@ function lerDiretorio( $diretorio ) {
 	   print " Arquivo: <a href='$listar'>$listar</a><br>";}
 	}
 }
-function logout() {
-	$pagina = $_SERVER["PHP_SELF"];
-	unset($_SESSION["user"]); 
-	unset($_SESSION["pass"]);
- 
- echo "<script>location.href='index.php'</script>";
-}
 
-function proteger(){
- 	$pagina = $_SERVER["PHP_SELF"];
- 	if(($_SESSION["user"]!="") OR ($_SESSION["pass"]!="")){}
- 	else{
- 	echo "<script>location.href='login.php?act=frm&pagina=$pagina'</script>";
- }
-}
 
 function valida_login($usuario,$senha,$pagina){
  	include("usuarios.php");
