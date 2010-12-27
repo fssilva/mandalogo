@@ -1,3 +1,12 @@
+<?php
+
+include_once 'Util.php';
+
+if (!isset($_SESSION)) session_start();
+
+protegerAllPage(); 
+?>
+
 <style type="text/css">
 <!--
 a:link {
@@ -13,12 +22,8 @@ a:active {
 	text-decoration: none;
 }
 -->
-</style><?php
-if (!isset($_SESSION)) session_start();
-
-include_once 'newFunctions.php';
-protegerAllPage();
-
+</style>
+<?php
 echo "<a href = > Muda Senha</a><br>";
 echo "<a href = >Mudar Resposta Secreta</a><br>";
 echo "<a href = >Mudar E-Mail</a><br>";

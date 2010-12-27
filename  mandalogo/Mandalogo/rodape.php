@@ -1,10 +1,8 @@
 <?php
+include_once 'Util.php';
+include("funcoes.php");
 
 if (!isset($_SESSION)) session_start();
-
-include("funcoes.php");
-include 'newFunctions.php';
-
 
 protegerAllPage();
 
@@ -14,7 +12,7 @@ if($_GET["acao"]=="logout"){
 
 else {
 
-	?>
+?>
 <style type="text/css">
 <!--
 #apDiv1 {

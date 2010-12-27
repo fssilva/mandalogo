@@ -1,3 +1,12 @@
+<?php
+include_once 'Util.php';
+
+if (!isset($_SESSION)) 
+	session_start();
+
+protegerAllPage();
+?>
+
 <style type="text/css">
 <!--
 *{ margin:0; padding:0;}

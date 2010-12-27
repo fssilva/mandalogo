@@ -1,5 +1,5 @@
 <?php
-include 'newFunctions.php';
+include_once 'Util.php';
 
 $usuario = $_POST["usuario"];
 $senha  = $_POST["senha"];

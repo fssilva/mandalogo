@@ -51,10 +51,10 @@ function valida_login_no_BD($usuario,$senha,$pagina){
 		
 }
 
-function cadastraNoBD($usuario, $group) {
+function cadastraNoBD($usuario, $group, $disciplina) {
 	$conexao = connect();
 	
-	$query = 'INSERT INTO usuariosAutorizados (`login`, `email`, `group`)  values('.'"'.$usuario.'"'.','.'"'.$usuario.'@lcc.ufcg.edu.br'.'"'.','.(int)$group.')';
+	$query = 'INSERT INTO usuariosAutorizados (`login`, `email`, `group`, `disciplina`)  values('.'"'.$usuario.'"'.','.'"'.$usuario.'@lcc.ufcg.edu.br'.'"'.','.(int)$group.'"'.$disciplina.'"'.')';
 
 
 	$resultado = mysql_query($query,$conexao);
@@ -78,6 +78,19 @@ function connect() {
 	
 	return $conexao;
 	
+}
+
+function sessionCountTimeOut() {
+	// set timeout period in seconds
+	$inactive = 100;
+
+	// check to see if $_SESSION['timeout'] is set
+	if(isset($_SESSION['timeout']) ) {
+		$session_life = time() - $_SESSION['start'];
+		if($session_life > $inactive)
+        	{ session_destroy(); header("Location: deslogar.php"); }
+	}
+	$_SESSION['timeout'] = time();
 }
 
 ?>
