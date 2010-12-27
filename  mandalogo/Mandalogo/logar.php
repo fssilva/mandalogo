@@ -8,7 +8,7 @@ $pagina = $_GET["pagina"];
 $resultado = valida_login_no_BD($usuario,$senha,$pagina);
 
 if(!resultado) {
-	echo "<a href= index.php>";
+	echo "<a href= index.php>"; // nao estar no sistema.
 }
 else {
 	if (!isset($_SESSION)) session_start();
@@ -16,7 +16,6 @@ else {
 		$_SESSION['user'] = $resultado['login'];
  		$_SESSION['group'] = $resultado['group'];
  		
- 		//echo "<script>location.href='$pagina'</script>";
  		header("Location: $pagina");
 }
 ?>

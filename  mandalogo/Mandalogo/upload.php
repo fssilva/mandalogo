@@ -1,13 +1,17 @@
 <?php
+include_once 'Util.php';
+
+if (!isset($_SESSION)) 
+	session_start();
 
 // Pasta onde o arquivo vai ser salvo
-$_UP['pasta'] = '4rqu1v0S/'. $_POST["diretorio"] . '/';
+$_UP['pasta'] = '4rqu1v0S/'. retornaPastaDoUsuario($_SESSION["user"]) . '/';
 
 // Tamanho máximo do arquivo (em Bytes)
 $_UP['tamanho'] = 1024 * 1024 * 4; // 4Mb
 
 // Array com as extensões permitidas
-$_UP['extensoes'] = array('zip', 'rar', 'tar.gz' );
+$_UP['extensoes'] = array('zip', 'rar', 'tar.gz', 'jpg' );
 
 // Renomeia o arquivo? (Se true, o arquivo será salvo como .jpg e um nome único)
 $_UP['renomeia'] = false;

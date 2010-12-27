@@ -103,7 +103,7 @@ a:active {
 -->
 </style>
 <div class="box">
-<form method="post" action="gameover.php" enctype="multipart/form-data">
+<form method="post" action="upload.php" enctype="multipart/form-data">
 
 
 UP - Guardians
@@ -140,5 +140,7 @@ UP - Guardians
 
 </div>
 <div class="box">
-<h6><a href="rodape.php">Manager Files</a></h6>
+<h6><a href="rodape.php">Manager Files </a> 
+|
+<a href="cadastro.php">Register New Users</a></h6>
 </div>

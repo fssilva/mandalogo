@@ -1,5 +1,6 @@
 <?php
-session_start("login");
+if (!isset($_SESSION)) 
+	session_start();
 
 function cadastrar($usuario,$senha,$lembrete,$email){
  	include("usuarios.php");

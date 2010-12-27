@@ -10,7 +10,7 @@ if($_GET["acao"]=="logout"){
 	logout();
 }
 
-else {
+else {}
 
 ?>
 <style type="text/css">
@@ -104,4 +104,3 @@ body,td,th {
 	<? } ?>
 <a href="">Download all files</a>
 </body>
-<? } ?>

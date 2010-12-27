@@ -4,10 +4,22 @@ include_once 'Util.php';
 if (!isset($_SESSION)) session_start();
 
 protegerAllPage();
-onlyAdmin();
+
+$LEVELPAGE = 1;
+
+if($_SESSION['group'] < $LEVELPAGE) {
+	echo("Voce nao tem nivel de acesso para essa pagina.");
+	echo "<a href=deslogar.php><br>";
+ 	echo "Voltar";
+ 	echo "</a></font>";
+ 	exit;
+}
 
 if($_GET["acao"]=="cadastra"){
- cadastraNoBD($_POST["usuario"],$_POST["group"]);
+	if($_POST["group"] > $_SESSION['group']) {
+		//alert
+	}
+ cadastraNoBD($_POST["usuario"],$_POST["group"], $_POST["disciplina"]);
 }
 else{
 ?>
@@ -17,20 +29,25 @@ else{
 
 <script type="text/javascript">
 
+function verificaPermissoes (level) {
+	if(document.cadastroForm.group.value > level) {
+		alert("Você nao tem acesso para cadastrar esse tipo de usuario.");
+		document.cadastroForm.group.focus();
+		return;
+	}
+}
+
 function enable_disable_radio(action) {
-	if(action.value == 0) {
-		document.cadastroForm.discip.disabled = false;
-		document.cadastroForm.discip2.disabled = false;
-		document.cadastroForm.discip3.disabled = false;
+	
+	if(action.value <= 1) {
+		document.cadastroForm.disciplina.disabled = false;
+		
 	}
 	else {
-		document.cadastroForm.discip.disabled = true;
-		document.cadastroForm.discip2.disabled = true;
-		document.cadastroForm.discip3.disabled = true;
-
-		document.cadastroForm.discip.checked = "";
-		document.cadastroForm.discip2.checked = "";
-		document.cadastroForm.discip3.checked = "";
+		
+		document.cadastroForm.disciplina.disabled = true;
+		
+		document.cadastroForm.disciplina.checked = "";
 	}
 }
 	
@@ -43,14 +60,30 @@ abaixo para poder se cadastrar.</font></b></p>
   <p><font size="2" face="Verdana">Nome de usuario:<br>
   <input type="text" name="usuario" size="40"><br><br>
   Group:<br>
-  <input type="radio" name="group" value="0" onchange="enable_disable_radio(this)"> User
-  <input type="radio" name="group" value="1" onchange="enable_disable_radio(this)"> Moderator
-  <input type="radio" name="group" value="2" onchange="enable_disable_radio(this)"> Admin<br><br>
+  <select name="group" size="1" onmouseout="enable_disable_radio(this)" >
+
+                    <option value="2">Admin</option>
+
+                    <option value="1">Moderator</option>
+
+                    <option value="0">User</option>
+
+  </select><br>
   Disciplina:<br>
-  <input disabled type="radio" name="discip" value="lp1"> Lp1
-  <input disabled type="radio" name="discip2" value="lp2"> Lp2
-  <input disabled type="radio" name="discip3" value="leda"> Leda<br><br>
-  <input type="submit" value="Cadastrar"> </font></p>
+  <select disabled name="disciplina" size="1" >
+
+                    <option value="labprog1-t1">LabProg1-t1</option>
+
+                    <option value="labprog1-t2">LabProg1-t2</option>
+
+                    <option value="labprog2-t1">LabProg2-t1</option>
+
+                    <option value="labprog2-t2">LabProg2-t2</option>
+
+                    <option value="labeda" >LabEda</option>
+	</select><br>
+                    
+<input type="submit" value="Cadastrar"> </font></p>
 </form>
 </body>
 </html>

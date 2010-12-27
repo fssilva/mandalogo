@@ -8,16 +8,6 @@ function protegerAllPage(){
  	}
 }
 
-function onlyAdmin(){
- 	$pagina = $_SERVER["PHP_SELF"];
- 	if($_SESSION["group"] !=2){
- 		echo("Você nao tem permisão para acessar essa pagina. Voce será Redirecionado em 5s.");
- 		
- 		echo "<script>location.href='index.php'</script>";
- 	}
-
-}
-
 function logout() {
 	$pagina = $_SERVER["PHP_SELF"];
 	unset($_SESSION["user"]); 
@@ -54,15 +44,27 @@ function valida_login_no_BD($usuario,$senha,$pagina){
 function cadastraNoBD($usuario, $group, $disciplina) {
 	$conexao = connect();
 	
-	$query = 'INSERT INTO usuariosAutorizados (`login`, `email`, `group`, `disciplina`)  values('.'"'.$usuario.'"'.','.'"'.$usuario.'@lcc.ufcg.edu.br'.'"'.','.(int)$group.'"'.$disciplina.'"'.')';
-
+	$query = 'INSERT INTO usuariosAutorizados (`login`, `email`, `group`, `disciplina`)  values('.'"'.$usuario.'"'.','.'"'.$usuario.'@lcc.ufcg.edu.br'.'"'.','.(int)$group.','.'"'.$disciplina.'"'.')';
 
 	$resultado = mysql_query($query,$conexao);
 	if($resultado) {
-		echo("Usuario Cadastrado");
+		echo "<font face=verdana size=2>";
+ 		echo "Usuario cadastrado.";
+ 		echo "<br>";
+ 		echo "<a href=cadastro.php>";
+ 		echo "Cadastrar Outro Usuario";
+ 		echo "</a><br><a href=index.php>";
+ 		echo "Inicio";
+ 		echo "</a></font>";
 	}
 	else {
-		echo("Usuario Nao Pode ser cadastrado");
+		echo "<font face=verdana size=2>";
+ 		echo "Usuario nao pode ser cadastrado.";
+ 		echo "<br>";
+ 		echo "<a href=javascript:history.back(1)>";
+ 		echo "Voltar";
+ 		echo "</a></font>";
+		
 	}
 	
 	
@@ -91,6 +93,24 @@ function sessionCountTimeOut() {
         	{ session_destroy(); header("Location: deslogar.php"); }
 	}
 	$_SESSION['timeout'] = time();
+}
+
+function retornaPastaDoUsuario($usuario) {
+	$conexao = connect();
+	
+	$query = 'SELECT group, disciplina from usuariosAutorizados where `login` ='.'"'.$usuario.'"';
+	echo($query);
+	
+	$resultado = mysql_query($query);
+	
+	$resultado = mysql_fetch_assoc($resultado);
+	if ($resultado) {
+		return $resultado['disciplina'];
+					
+	}
+	
+	
+	
 }
 
 ?>
