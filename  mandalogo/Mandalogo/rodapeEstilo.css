@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+
+#apDiv1 {
+	position: absolute;
+	left: 237px;
+	top: 112px;
+	width: 608px;
+	height: 246px;
+	z-index: 1
+}
+
+a:link {
+	color: #FFF;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #FFF;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #FFF;
+	text-decoration: underline;
+}
+
+a:active {
+	color: #FFF;
+	text-decoration: none;
+}
+
+body {
+	background-image: url();
+	background-repeat: repeat-x;
+	background-color: #000;
+}
+
+body,td,th {
+	color: #999;
+}

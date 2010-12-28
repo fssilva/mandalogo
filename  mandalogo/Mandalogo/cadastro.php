@@ -17,9 +17,12 @@ if($_SESSION['group'] < $LEVELPAGE) {
 
 if($_GET["acao"]=="cadastra"){
 	if($_POST["group"] > $_SESSION['group']) {
-		//alert
+		header("Location: Cadastro.php");
 	}
- cadastraNoBD($_POST["usuario"],$_POST["group"], $_POST["disciplina"]);
+	else {
+		cadastraNoBD($_POST["usuario"],$_POST["group"], $_POST["disciplina"]);
+	}
+ 
 }
 else{
 ?>
@@ -29,12 +32,20 @@ else{
 
 <script type="text/javascript">
 
-function verificaPermissoes (level) {
-	if(document.cadastroForm.group.value > level) {
+function verificaPermissoes_Fields() {
+	
+	if(document.cadastroForm.usuario.value == "" || document.cadastroForm.usuario.value < 6) {
+		alert("Preencha os campos corretamente");
+		document.cadastroForm.usuario.focus();
+		return false;
+	}
+	if(document.cadastroForm.group.value > <?=$_SESSION['group'] ?>) {
 		alert("Você nao tem acesso para cadastrar esse tipo de usuario.");
 		document.cadastroForm.group.focus();
-		return;
+		return false;
 	}
+		
+	return true;
 }
 
 function enable_disable_radio(action) {
@@ -56,21 +67,21 @@ function enable_disable_radio(action) {
 <body>
 <p><b><font size="2" face="Verdana">Preencha todos os campos do formul·rio
 abaixo para poder se cadastrar.</font></b></p>
-<form name="cadastroForm" method="POST" action="?acao=cadastra">
+<form name="cadastroForm" method="POST" onsubmit="return verificaPermissoes_Fields()" action="?acao=cadastra">
   <p><font size="2" face="Verdana">Nome de usuario:<br>
-  <input type="text" name="usuario" size="40"><br><br>
+  <input type="text" name="usuario" size="40">*Minimo de 6 letras<br><br>
   Group:<br>
   <select name="group" size="1" onmouseout="enable_disable_radio(this)" >
 
-                    <option value="2">Admin</option>
+                    <option value="0">User</option>
 
                     <option value="1">Moderator</option>
 
-                    <option value="0">User</option>
+                    <option value="2">Admin</option>
 
   </select><br>
   Disciplina:<br>
-  <select disabled name="disciplina" size="1" >
+  <select name="disciplina" size="1" >
 
                     <option value="labprog1-t1">LabProg1-t1</option>
 

@@ -1,0 +1,93 @@
+@CHARSET "UTF-8";
+
+*{ margin:0; padding:0;}
+body{
+	font:100% normal Arial, Helvetica, sans-serif;
+	background:#161712;
+	background-color: #000;	
+}
+form,input,select,textarea{margin:0; padding:0; color:#ffffff;}
+div.box {
+margin:0 auto;
+width:400px;
+position:relative;
+top:50px;
+border:1px solid #262626;
+}
+div.box h10 {
+color:#fff;
+font-size:10px;
+}
+
+div.box h1 {
+color:#ffffff;
+font-size:18px;
+text-transform:uppercase;
+padding:5px 0 5px 5px;
+border-bottom:1px solid #161712;
+border-top:1px solid #161712;
+}
+
+div.box label {
+width:100%;
+display: block;
+background:#1C1C1C;
+border-top:0px solid #262626;
+border-bottom:1px solid #161712;
+padding:10px 0 10px 0;
+}
+
+div.box label span {
+display: block;
+color:#bbbbbb;
+font-size:12px;
+float:left;
+width:75px;
+text-align:right;
+padding:5px 20px 0 0;
+}
+
+div.box .input_text {
+padding:10px 10px;
+width:206px;
+background:#262626;
+border-bottom: 1px double #171717;
+border-top: 1px double #171717;
+border-left:1px double #333333;
+border-right:1px double #333333;
+}
+
+
+div.box .button
+{
+margin:-18 0 10px 200px;
+padding:4px 7px;
+position: relative;
+border:0px;
+top:-35px;
+left:96px
+
+}
+
+div.box .file
+{
+padding:10px 10px;
+width:200px;
+background:#AAAAAA;
+}
+a:link {
+	text-decoration: none;
+	color: #FFF;
+}
+a:visited {
+	text-decoration: none;
+	color: #FFF;
+}
+a:hover {
+	text-decoration: underline;
+	color: #FFF;
+}
+a:active {
+	text-decoration: none;
+	color: #FFF;
+}

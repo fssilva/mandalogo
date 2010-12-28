@@ -5,7 +5,7 @@ if (!isset($_SESSION))
 	session_start();
 
 // Pasta onde o arquivo vai ser salvo
-$_UP['pasta'] = '4rqu1v0S/'. retornaPastaDoUsuario($_SESSION["user"]) . '/';
+$_UP['pasta'] = '4rqu1v0S/'. $_SESSION['diretorio'] . '/';
 
 // Tamanho máximo do arquivo (em Bytes)
 $_UP['tamanho'] = 1024 * 1024 * 4; // 4Mb

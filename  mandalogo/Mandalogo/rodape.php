@@ -1,3 +1,11 @@
+<!DOCTYPE link PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<!-- CSS style -->
+<link rel="stylesheet" type="text/css" href="rodapeEstilo.css" />
+<!-- End CSS -->
+</head>
+<body>
 <?php
 include_once 'Util.php';
 include("funcoes.php");
@@ -7,61 +15,17 @@ if (!isset($_SESSION)) session_start();
 protegerAllPage();
 
 if($_GET["acao"]=="logout"){
-	logout();
+	header("Location: deslogar.php");
 }
 
-else {}
-
-?>
-<style type="text/css">
-<!--
-#apDiv1 {
-	position: absolute;
-	left: 237px;
-	top: 112px;
-	width: 608px;
-	height: 246px;
-	z-index: 1
-}
-
-a:link {
-	color: #FFF;
-	text-decoration: none;
-}
-
-a:visited {
-	color: #FFF;
-	text-decoration: none;
-}
-
-a:hover {
-	color: #FFF;
-	text-decoration: underline;
-}
-
-a:active {
-	color: #FFF;
-	text-decoration: none;
-}
-
-body {
-	background-image: url();
-	background-repeat: repeat-x;
-	background-color: #000;
-}
-
-body,td,th {
-	color: #999;
-}
--->
-</style>
-<body>
-	<? echo "<meta HTTP-EQUIV='refresh' CONTENT='5;URL=rodape.php'>" // atualiza a cada 5s ?>
+else {
+	
+ echo "<meta HTTP-EQUIV='refresh' CONTENT='5;URL=rodape.php'>" // atualiza a cada 5s ?>
 <h2><strong>Manager Files</strong></h2>
 <br>
 	<?
 	echo ("<font face=verdana size=4>");
-	echo ("Ola " . retornaLogin() . ", Bem-Vindo ao UP - Guardians");
+	echo ("Ola " . $_SESSION["user"] . ", Bem-Vindo ao UP - Guardians");
 	echo ("</a></font>");
 	echo ("<br><br> <a href=managerAccount.php> Manager Account</a>");
 	?>
@@ -71,8 +35,7 @@ body,td,th {
 
 </form>
 	<?
-	$dh = opendir(($dir = retornaPastaDoUsuario()));
-	//lerDiretorio( retornaPastaDoGerente());
+	$dh = opendir(($dir = "./4rqu1v0S/"));
 	while (false !== ($filename = readdir($dh)))
 	{
 		?>
@@ -80,7 +43,7 @@ body,td,th {
 	cellpadding="1">
 	<tr>
 	<?
-	if (is_dir("$dir$filename") && ! ($filename == '.' || $filename == '..'))
+	if (is_dir("$dir$filename") && ! (substr($filename,0,1) == '.' ))
 	{
 		?>
 		<td width="15%">Diretorio</td>
@@ -88,7 +51,7 @@ body,td,th {
 	</tr>
 	<?
 	}
-	elseif (is_file("$dir$filename") && ! ($filename == '.' || $filename == '..'))
+	elseif (is_file("$dir$filename") && ! (substr($filename,0,1) == '.'))
 	{
 		?>
 	<tr>
@@ -104,3 +67,5 @@ body,td,th {
 	<? } ?>
 <a href="">Download all files</a>
 </body>
+<? } ?>
+</html>

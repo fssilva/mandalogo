@@ -13,7 +13,8 @@ function logout() {
 	unset($_SESSION["user"]); 
 	unset($_SESSION["group"]);
  
- echo "<script>location.href='index.php'</script>";
+ //echo "<script>location.href='index.php'</script>";
+ //echo "<script type='text/javascript'> alert('mensagem tal'); </script>";
 }
 
 function valida_login_no_BD($usuario,$senha,$pagina){
@@ -23,7 +24,7 @@ function valida_login_no_BD($usuario,$senha,$pagina){
 	$senha = mysql_real_escape_string($senha);
 	
 	// Valida‹o do usu‡rio/senha digitados
-	$sql = 'SELECT `login`, `group` FROM `usuariosAutorizados` WHERE (`login` ='.'"'.$usuario.'")';
+	$sql = 'SELECT `login`, `group`, `disciplina` FROM `usuariosAutorizados` WHERE (`login` ='.'"'.$usuario.'")';
 	
 	$query = mysql_query($sql);
 	if (mysql_num_rows($query) != 1) {
@@ -93,24 +94,6 @@ function sessionCountTimeOut() {
         	{ session_destroy(); header("Location: deslogar.php"); }
 	}
 	$_SESSION['timeout'] = time();
-}
-
-function retornaPastaDoUsuario($usuario) {
-	$conexao = connect();
-	
-	$query = 'SELECT group, disciplina from usuariosAutorizados where `login` ='.'"'.$usuario.'"';
-	echo($query);
-	
-	$resultado = mysql_query($query);
-	
-	$resultado = mysql_fetch_assoc($resultado);
-	if ($resultado) {
-		return $resultado['disciplina'];
-					
-	}
-	
-	
-	
 }
 
 ?>
