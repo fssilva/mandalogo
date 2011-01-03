@@ -1,17 +1,17 @@
 <?php
 
 function protegerAllPage(){
- 	$pagina = $_SERVER["PHP_SELF"];
+ 	$pagina = $_SERVER['PHP_SELF'];
  	if(($_SESSION["user"] == "") OR ($_SESSION["group"] == "")){
- 		echo "<script>location.href='login.php?act=frm&pagina=$pagina'</script>";
+ 		echo "<script>location.href='login.php?pagina=$pagina'</script>";
  		
  	}
 }
 
 function logout() {
-	$pagina = $_SERVER["PHP_SELF"];
 	unset($_SESSION["user"]); 
 	unset($_SESSION["group"]);
+	unset($_SESSION['diretorio']); 
  
  //echo "<script>location.href='index.php'</script>";
  //echo "<script type='text/javascript'> alert('mensagem tal'); </script>";
@@ -94,6 +94,43 @@ function sessionCountTimeOut() {
         	{ session_destroy(); header("Location: deslogar.php"); }
 	}
 	$_SESSION['timeout'] = time();
+}
+
+function recuperaSenha($usuario) {
+	$code = geraCodeRandom();
+	$conexao = connect();
+	
+	$query = 'UPDATE usuariosAutorizados set `code` ='.$code.' where `login` ='.'"'.$_SESSION['user'].'"';
+	
+	$resultado = mysql_query($query,$conexao);
+	
+	// The message
+	$message = "http://localhost:8888/mudarSenha.php?login=".$usuario."&code=".$code;
+
+	// Send
+	mail('felipeso@lcc.ufcg.edu.br', 'Recuperacao deSenha', $message);
+	echo("enviado");
+}
+
+function  geraCodeRandom() {
+	$tamanho = 12;
+    $maius = "ABCDEFGHIJKLMNOPQRSTUWXYZ";
+    $minus = "abcdefghijklmnopqrstuwxyz";
+    $numer = "49061723850412359678";
+    
+ 
+    $base = '';
+    $base .= $maius;
+    $base .= $minus;
+    $base .= $numer;
+    
+ 
+    srand((float) microtime() * 10000000);
+    $senha = '';
+    for ($i = 0; $i < $tamanho; $i++) {
+        $senha .= substr($base, rand(0, strlen($base)-1), 1);
+    }
+    return $senha;
 }
 
 ?>

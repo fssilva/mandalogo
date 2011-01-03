@@ -8,7 +8,7 @@
 <body>
 <?php
 include_once 'Util.php';
-include("funcoes.php");
+//include("funcoes.php");
 
 if (!isset($_SESSION)) session_start();
 
@@ -28,18 +28,16 @@ else {
 	echo ("Ola " . $_SESSION["user"] . ", Bem-Vindo ao UP - Guardians");
 	echo ("</a></font>");
 	echo ("<br><br> <a href=managerAccount.php> Manager Account</a>");
+	echo ("<br> <a href=deslogar.php> Logout</a>");
 	?>
-</h2>
-<form action="?acao=logout" method="post">
-<p><input name="logout" type="submit" value="logout"></p>
 
-</form>
+
 	<?
-	$dh = opendir(($dir = "./4rqu1v0S/"));
+	$dh = opendir(($dir = "./4rqu1v0S/".$_SESSION['diretorio']."/"));
 	while (false !== ($filename = readdir($dh)))
 	{
 		?>
-<table width="401" border="0" a align="center" cellspacing="1"
+<table width="401" border="0" align="center" cellspacing="1"
 	cellpadding="1">
 	<tr>
 	<?

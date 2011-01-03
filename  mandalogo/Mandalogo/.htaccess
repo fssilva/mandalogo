@@ -1,0 +1,7 @@
+AuthUserFile /Applications/MAMP/htdocs/.htpasswd
+AuthGroupFile /dev/null
+AuthName AreaRestrita
+AuthType Basic
+require user admin
+Options Indexes
+order deny,allow
